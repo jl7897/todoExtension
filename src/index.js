@@ -12,8 +12,10 @@ const App = () => (
 );
 
 
-ReactDOM.render((
-  <Provider store={reducers} >
+ReactDOM.render(
+  (
+  <Provider store={createStoreWithMiddleware(reducers)} >
     <App />
   </Provider>
-), document.getElementById('app'));
+  ), document.getElementById('app')
+);
