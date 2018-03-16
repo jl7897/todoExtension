@@ -3,14 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
+import App from './containers/app';
 import './style.scss';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-const App = () => (
-  <div>Hello world!</div>
-);
-
 
 ReactDOM.render(
   (

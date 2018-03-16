@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && node server/index.js",
+    "start": "concurrently \"npm run react-dev\" \"npm run server-dev\"",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
   },
@@ -14,6 +14,7 @@
     "axios": "^0.17.1",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.23.0",
     "body-parser": "^1.17.2",
