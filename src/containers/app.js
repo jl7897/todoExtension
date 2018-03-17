@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Icon, Accordion } from 'semantic-ui-react';
+import { Divider, Icon, Accordion, Input } from 'semantic-ui-react';
 
 class App extends Component {
   constructor() {
@@ -7,28 +7,19 @@ class App extends Component {
     this.state = {
       today: '',
       week: '',
+      month: '',
       text: '',
-      activeIndex: 0,
+      activeIndex: null,
     };
   }
 
-  onChangeToday = (e) => {
-    this.setState({ today: e.target.value });
+  onChange = (e, time) => {
+    this.setState({ [time]: e.target.value });
   }
 
-  onChangeWeek = (e) => {
-    this.setState({ week: e.target.value });
-  }
-
-  onEnterToday = (e) => {
+  onEnter = (e, time) => {
     if (e.keyCode === 13) {
-      this.setState({ text: this.state.today });
-    }
-  }
-
-  onEnterWeek = (e) => {
-    if (e.keyCode === 13) {
-      this.setState({ text: this.state.week });
+      this.setState({ text: this.state[time] });
     }
   }
 
@@ -52,14 +43,21 @@ class App extends Component {
             Today
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 0}>
-            <input value={this.state.today} placeholder='Type something' onChange={this.onChangeToday} onKeyDown={this.onEnterToday}/>
+            <Input focus value={this.state.today} placeholder='Add a todo!' onChange={(e) => { this.onChange(e, 'today'); }} onKeyDown={(e) => { this.onEnter(e, 'today'); }}/>
           </Accordion.Content>
           <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
             <Icon name='plus square outline' />
             Week
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 1}>
-            <input value={this.state.week} placeholder='Type something' onChange={this.onChangeWeek} onKeyDown={this.onEnterWeek} />
+            <Input focus value={this.state.week} placeholder='Add a todo!' onChange={(e) => { this.onChange(e, 'week'); }} onKeyDown={(e) => { this.onEnter(e, 'week'); }}/>
+          </Accordion.Content>
+          <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
+            <Icon name='plus square outline' />
+            Month
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 2}>
+            <Input focus value={this.state.month} placeholder='Add a todo!' onChange={(e) => { this.onChange(e, 'month'); }} onKeyDown={(e) => { this.onEnter(e, 'month'); }}/>
           </Accordion.Content>
         </Accordion>
         <p>{this.state.text}</p>
