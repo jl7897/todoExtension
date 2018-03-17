@@ -11,7 +11,9 @@ class App extends Component {
       todayTodos: [],
       weekTodos: [],
       monthTodos: [],
-      activeIndex: 0,
+      activeIndexToday: 0,
+      activeIndexWeek: null,
+      activeIndexMonth: null,
     };
   }
 
@@ -29,78 +31,107 @@ class App extends Component {
     }
   }
 
-  handleClick = (e, titleProps) => {
+  handleClickToday = (e, titleProps) => {
     const { index } = titleProps;
-    const { activeIndex } = this.state;
-    const newIndex = activeIndex === index ? -1 : index;
+    const { activeIndexToday } = this.state;
+    const newIndex = activeIndexToday === index ? -1 : index;
 
-    this.setState({ activeIndex: newIndex });
+    this.setState({ activeIndexToday: newIndex });
+  }
+
+  handleClickWeek = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndexWeek } = this.state;
+    const newIndex = activeIndexWeek === index ? -1 : index;
+
+    this.setState({ activeIndexWeek: newIndex });
+  }
+
+  handleClickMonth = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndexMonth } = this.state;
+    const newIndex = activeIndexMonth === index ? -1 : index;
+
+    this.setState({ activeIndexMonth: newIndex });
   }
 
   render = () => {
-    const { activeIndex } = this.state;
+    const { activeIndexToday, activeIndexWeek, activeIndexMonth } = this.state;
     return (
       <div>
         <h3>To do's</h3>
         <Divider/>
-        <Accordion styled>
-          <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+        <Accordion styled className='accordian'>
+          <Accordion.Title
+          active={activeIndexToday === 0}
+          index={0}
+          onClick={this.handleClickToday}>
             <Icon name='plus square outline' />
             Today
           </Accordion.Title>
-          <Accordion.Content active={activeIndex === 0}>
+          <Accordion.Content active={activeIndexToday === 0}>
             <Input
             icon='add to calendar'
             label='Todo:'
             size='mini'
             value={this.state.today}
-            placeholder='Add a todo!'
+            placeholder='Add a todo for today!'
             onChange={(e) => { this.onChange(e, 'today'); }}
             onKeyDown={(e) => { this.onEnter(e, 'today'); }}/>
             <div className='todoList'>{this.state.todayTodos.map(item => (
-              <div className='todoListItem'>
+              <div key={item} className='todoListItem'>
                 <div className='todoListItem'><Icon name='circle' color='yellow'/>{item}</div>
                 <Divider fitted/>
               </div>
             ))}
             </div>
           </Accordion.Content>
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
+        </Accordion>
+        <Accordion styled className='accordian'>
+          <Accordion.Title
+          active={activeIndexWeek === 0}
+          index={0}
+          onClick={this.handleClickWeek}>
             <Icon name='plus square outline' />
             Week
           </Accordion.Title>
-          <Accordion.Content active={activeIndex === 1}>
+          <Accordion.Content active={activeIndexWeek === 0}>
             <Input
-            icon='add to calendar'
-            label='Todo:'
-            size='mini'
-            value={this.state.week}
-            placeholder='Add a todo!'
-            onChange={(e) => { this.onChange(e, 'week'); }}
-            onKeyDown={(e) => { this.onEnter(e, 'week'); }}/>
+              icon='add to calendar'
+              label='Todo:'
+              size='mini'
+              value={this.state.week}
+              placeholder='Add a todo for this week!'
+              onChange={(e) => { this.onChange(e, 'week'); }}
+              onKeyDown={(e) => { this.onEnter(e, 'week'); }} />
             <div className='todoList'>{this.state.weekTodos.map(item => (
-              <div className='todoListItem'>
+              <div key={item} className='todoListItem'>
                 <div className='todoListItem'><Icon name='circle' color='yellow' />{item}</div>
                 <Divider fitted />
               </div>
             ))}
             </div>
           </Accordion.Content>
-          <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
+        </Accordion>
+        <Accordion styled className='accordian'>
+          <Accordion.Title
+          active={activeIndexMonth === 0}
+          index={0}
+          onClick={this.handleClickMonth}>
             <Icon name='plus square outline' />
             Month
           </Accordion.Title>
-          <Accordion.Content active={activeIndex === 2}>
+          <Accordion.Content active={activeIndexMonth === 0}>
             <Input
-            icon='add to calendar'
-            label='Todo:'
-            size='mini'
-            value={this.state.month}
-            placeholder='Add a todo!'
-            onChange={(e) => { this.onChange(e, 'month'); }}
-            onKeyDown={(e) => { this.onEnter(e, 'month'); }}/>
+              icon='add to calendar'
+              label='Todo:'
+              size='mini'
+              value={this.state.month}
+              placeholder='Add a todo for this month!'
+              onChange={(e) => { this.onChange(e, 'month'); }}
+              onKeyDown={(e) => { this.onEnter(e, 'month'); }} />
             <div className='todoList'>{this.state.monthTodos.map(item => (
-              <div className='todoListItem'>
+              <div key={item} className='todoListItem'>
                 <div className='todoListItem'><Icon name='circle' color='yellow' />{item}</div>
                 <Divider fitted />
               </div>
