@@ -139,7 +139,6 @@ class App extends Component {
             </div>
           </Accordion.Content>
         </Accordion>
-        <p>{this.state.text}</p>
       </div>
     );
   };
