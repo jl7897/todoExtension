@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Divider, Icon, Accordion, Input } from 'semantic-ui-react';
+import ItemList from '../components/ItemList';
 
 class App extends Component {
   constructor() {
@@ -78,13 +79,7 @@ class App extends Component {
             placeholder='Add a todo for today!'
             onChange={(e) => { this.onChange(e, 'today'); }}
             onKeyDown={(e) => { this.onEnter(e, 'today'); }}/>
-            <div className='todoList'>{this.state.todayTodos.map(item => (
-              <div key={item} className='todoListItem'>
-                <div className='todoListItem'><Icon name='circle' color='yellow'/>{item}</div>
-                <Divider fitted/>
-              </div>
-            ))}
-            </div>
+            <ItemList todos={this.state.todayTodos}/>
           </Accordion.Content>
         </Accordion>
         <Accordion styled className='accordian'>
@@ -104,13 +99,7 @@ class App extends Component {
               placeholder='Add a todo for this week!'
               onChange={(e) => { this.onChange(e, 'week'); }}
               onKeyDown={(e) => { this.onEnter(e, 'week'); }} />
-            <div className='todoList'>{this.state.weekTodos.map(item => (
-              <div key={item} className='todoListItem'>
-                <div className='todoListItem'><Icon name='circle' color='yellow' />{item}</div>
-                <Divider fitted />
-              </div>
-            ))}
-            </div>
+            <ItemList todos={this.state.weekTodos} />
           </Accordion.Content>
         </Accordion>
         <Accordion styled className='accordian'>
@@ -130,13 +119,7 @@ class App extends Component {
               placeholder='Add a todo for this month!'
               onChange={(e) => { this.onChange(e, 'month'); }}
               onKeyDown={(e) => { this.onEnter(e, 'month'); }} />
-            <div className='todoList'>{this.state.monthTodos.map(item => (
-              <div key={item} className='todoListItem'>
-                <div className='todoListItem'><Icon name='circle' color='yellow' />{item}</div>
-                <Divider fitted />
-              </div>
-            ))}
-            </div>
+            <ItemList todos={this.state.monthTodos} />
           </Accordion.Content>
         </Accordion>
       </div>

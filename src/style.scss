@@ -13,6 +13,12 @@ body {
     margin-bottom: 2%;
 }
 
+.todoListItemDone {
+    margin-bottom: 2%;
+    text-decoration: line-through;
+    color: grey;
+}
+
 .accordian {
     margin-bottom: 2%;
 }
