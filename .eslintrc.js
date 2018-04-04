@@ -24,6 +24,7 @@ module.exports = {
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "no-console": "off",
+    "no-param-reassign": 0,
     "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
     "object-curly-newline": ["error", {
       "ObjectExpression": { "minProperties": 2},
