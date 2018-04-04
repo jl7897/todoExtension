@@ -25,11 +25,29 @@ class App extends Component {
   onEnter = (e, time) => {
     if (e.keyCode === 13) {
       const todos = `${time}Todos`;
+      const newItem = {
+        todo: this.state[time],
+        done: false,
+      };
       this.setState({
         [time]: '',
-        [todos]: [...this.state[todos], this.state[time]],
+        [todos]: [...this.state[todos], newItem],
       });
     }
+  }
+
+  toggleDone = (index, time) => {
+    const todos = `${time}Todos`;
+    const newState = [...this.state[todos]];
+    newState[index].done = !newState[index].done;
+    this.setState({ [todos]: newState });
+  }
+
+  onDelete = (index, time) => {
+    const todos = `${time}Todos`;
+    const newState = [...this.state[todos]];
+    newState.splice(index, 1);
+    this.setState({ [todos]: newState });
   }
 
   handleClickToday = (e, titleProps) => {
@@ -79,7 +97,7 @@ class App extends Component {
             placeholder='Add a todo for today!'
             onChange={(e) => { this.onChange(e, 'today'); }}
             onKeyDown={(e) => { this.onEnter(e, 'today'); }}/>
-            <ItemList todos={this.state.todayTodos}/>
+            <ItemList time={'today'} todos={this.state.todayTodos} onDelete={this.onDelete} toggleDone={this.toggleDone}/>
           </Accordion.Content>
         </Accordion>
         <Accordion styled className='accordian'>
@@ -99,7 +117,7 @@ class App extends Component {
               placeholder='Add a todo for this week!'
               onChange={(e) => { this.onChange(e, 'week'); }}
               onKeyDown={(e) => { this.onEnter(e, 'week'); }} />
-            <ItemList todos={this.state.weekTodos} />
+            <ItemList time={'week'} todos={this.state.weekTodos} onDelete={this.onDelete} toggleDone={this.toggleDone}/>
           </Accordion.Content>
         </Accordion>
         <Accordion styled className='accordian'>
@@ -119,7 +137,7 @@ class App extends Component {
               placeholder='Add a todo for this month!'
               onChange={(e) => { this.onChange(e, 'month'); }}
               onKeyDown={(e) => { this.onEnter(e, 'month'); }} />
-            <ItemList todos={this.state.monthTodos} />
+            <ItemList time={'month'} todos={this.state.monthTodos} onDelete={this.onDelete} toggleDone={this.toggleDone}/>
           </Accordion.Content>
         </Accordion>
       </div>

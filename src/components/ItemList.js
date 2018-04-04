@@ -3,8 +3,14 @@ import React from 'react';
 import ListItem from './ListItem';
 
 const ItemList = props => (
-  <div className='todoList'>{props.todos.map(item => (
-        <ListItem item={item}/>
+  <div className='todoList'>{props.todos.map((item, i) => (
+        <ListItem
+        key={i}
+        index={i}
+        time={props.time}
+        item={item}
+        onDelete={props.onDelete}
+        toggleDone={props.toggleDone}/>
     ))}
     </div>
 );

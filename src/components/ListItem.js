@@ -1,22 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Divider, Icon } from 'semantic-ui-react';
 
-class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { clicked: false };
-  }
-
-  clicked = () => {
-    this.setState({ clicked: !this.state.clicked });
-  }
-
-  render = () => (
-    <div onClick={this.clicked} key={this.props.item} className={this.state.clicked ? 'todoListItemDone' : 'todoListItem'}>
-      <div className='todoListItem'><Icon name={this.state.clicked ? 'check' : 'circle'} color={this.state.clicked ? 'green' : 'yellow'} />{this.props.item}</div>
+const ListItem = props => (
+    <div className={props.item.done ? 'todoListItemDone' : 'todoListItem'}>
+      <div className='todoListItem'><Icon onClick={() => { props.toggleDone(props.index, props.time); }} name={props.item.done ? 'check' : 'circle'} color={props.item.done ? 'green' : 'yellow'} />{props.item.todo}
+        <span style={{ float: 'right' }}>
+          <Icon onClick={() => { props.onDelete(props.index, props.time); }} name='trash'/>
+        </span>
+      </div>
       <Divider fitted />
     </div>
-  )
-}
+);
 
 export default ListItem;
